@@ -1,0 +1,25 @@
+{
+  "name": "urainium-project4-url-shortner",
+  "version": "1.0.0",
+  "description": "## Scalable URL Shortner Project Requirement",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/amitvsk/Urainium-project4-URL-Shortner.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/amitvsk/Urainium-project4-URL-Shortner/issues"
+  },
+  "homepage": "https://github.com/amitvsk/Urainium-project4-URL-Shortner#readme",
+  "dependencies": {
+    "express": "^4.18.1",
+    "mongoose": "^6.3.3",
+    "router": "^1.3.7"
+  }
+}
