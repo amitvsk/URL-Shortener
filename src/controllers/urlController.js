@@ -79,7 +79,7 @@ const getUrlcode = async function (req, res) {
         const checkCache = await GET_ASYNC(`${urlCode}`) // find the data in cache memory
         if (checkCache) {
             let obj = JSON.parse(checkCache) //convert to JSON string in JSON object
-            return res.status(200).redirect(JSON.parse(obj)) // redirect the url
+            return res.status(302).redirect(JSON.parse(obj)) // redirect the url
         }
 
         let getUrl = await urlModels.findOne({ urlCode }) // find the url data in db by urlcode
