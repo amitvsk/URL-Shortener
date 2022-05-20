@@ -27,13 +27,13 @@ const GET_ASYNC = promisify(redisClient.GET).bind(redisClient);
 const createUrl = async function (req, res) {
     try {
         let data = req.body
-        const longUrl = data.url;
+        const longUrl = data.longUrl;
         const base = "http://localhost:3000"     //our server base code
         const urlCode = shortid.generate(); // generate the unique code
         // check the data are present or not 
         if (!Validator.isValidReqBody(data)) { return res.status(400).send({ status: false, msg: "Please provide data" }) }
         // required the url in body
-        if (!Validator.isValid(longUrl)) return res.status(400).send({ status: false, msg: "Please provide Url Link" })
+        if (!Validator.isValid(longUrl)) return res.status(400).send({ status: false, msg: "Please provide long Url Link" })
         // validation  of url link
         if (Validator.validUrl(longUrl)) {
             const checkCache = await GET_ASYNC(`${longUrl}`) // find the data in cache memory
