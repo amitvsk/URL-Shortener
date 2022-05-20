@@ -1,7 +1,6 @@
 
 const shortid = require('shortid');
 const Validator = require('../Validator/valid');
-
 const urlModels = require("../models/urlModels");
 const redis = require("redis");
 const { promisify } = require("util")
@@ -74,7 +73,7 @@ const getUrlcode = async function (req, res) {
     try {
         let urlCode = req.params.urlCode
         //validation of the url code
-        if (!shortid.isValid(urlCode)) return res.status(400).send({ status: false, message: "Url code  is not valid !!" });
+        if(!shortid.isValid(urlCode)) return res.status(400).send({ status: false, message: "Url code  is not valid !!" });
 
 
         const checkCache = await GET_ASYNC(`${urlCode}`) // find the data in cache memory
@@ -83,8 +82,8 @@ const getUrlcode = async function (req, res) {
             return res.status(302).redirect(JSON.parse(obj)) // redirect the url
         }
 
-        let getUrl = await urlModels.findOne({ urlCode }) // find the url data in db by urlcode
-        if (!getUrl) return res.status(404).send({ status: false, msg: "This url code no data exists" })
+        let getUrl = await urlModels.findOne({urlCode}) // find the url data in db by urlcode
+        if (!getUrl) return res.status(404).send({ status: false, msg: "This urlcode no data exists" })
 
         let seturl = getUrl.longUrl
         await SET_ASYNC(`${seturl}`, JSON.stringify(getUrl)) // // set the data in cache memory 
