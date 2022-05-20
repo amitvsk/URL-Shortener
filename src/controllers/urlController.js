@@ -44,7 +44,7 @@ const createUrl = async function (req, res) {
             }
             const saveUrl = await urlModels.findOne({ longUrl: longUrl }) // check the data are present or not
             if (saveUrl) {
-                return res.status(400).send({ status: true, data: { longUrl: saveUrl.longUrl, shortUrl: saveUrl.shortUrl, urlCode: saveUrl.urlCode } })
+                return res.status(200).send({ status: true, data: { longUrl: saveUrl.longUrl, shortUrl: saveUrl.shortUrl, urlCode: saveUrl.urlCode } })
             }
             else {
                 const shortUrl = `${base}/${urlCode}`; // merage the base url and url code in store in short url
@@ -74,7 +74,8 @@ const getUrlcode = async function (req, res) {
     try {
         let urlCode = req.params.urlCode
         //validation of the url code
-        if (!/^[0-9A-Za-z-]{6,10}$/.test(urlCode)) return res.status(400).send({ status: false, message: "Url code  is not valid !!" });
+        if (!shortid.isValid(urlCode)) return res.status(400).send({ status: false, message: "Url code  is not valid !!" });
+
 
         const checkCache = await GET_ASYNC(`${urlCode}`) // find the data in cache memory
         if (checkCache) {
